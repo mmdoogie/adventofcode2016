@@ -61,7 +61,7 @@ def make_image(pos, output):
 
     for y in range(min_y, max_y + 1):
         for x in range(min_x, max_x + 1):
-            if [x, y] in pos:
+            if (x, y) in pos:
                 draw.point(((x - min_x) * 2 + 1, y - min_y + 1), fill = 0)
                 draw.point(((x - min_x) * 2 + 2, y - min_y + 1), fill = 0)
                 if output:
@@ -78,7 +78,7 @@ def ocr_image(img):
     img.save(raw_io, 'ppm')
     raw_io.seek(0)
 
-    with Popen(["gocr", "-"], stdin=PIPE, stdout=PIPE) as gocr_proc:
+    with Popen(["gocr", "-p", "./mrm/.gocr/", "-m2", "-"], stdin=PIPE, stdout=PIPE) as gocr_proc:
         gocr_proc.stdin.write(raw_io.read())
         gocr_proc.stdin.close()
         gocr_proc.wait()
