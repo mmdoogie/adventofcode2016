@@ -22,23 +22,11 @@ class _lle:
             el = el.left()
         return el
 
-    def insert_right(self, val):
-        new_el = _lle(val, self)
-        new_el._next = self._next
-        self._next._prev = new_el
-        self._next = new_el
-        return new_el
-
-    def insert_left(self, val):
-        new_el = _lle(val, self._prev, self)
-        self._prev._next = new_el
-        self._prev = new_el
-        return new_el
-
 class llist:
     def __init__(self, items, circular = False):
         prev = None
         self._circular = False
+        self._nodecount = 0
         for i in items:
             el = _lle(i, prev)
             if prev is None:
@@ -46,6 +34,7 @@ class llist:
             else:
                 el._prev._next = el
             prev = el
+            self._nodecount += 1
         if circular:
             self._circular = True
             self._head._prev = el
@@ -62,9 +51,34 @@ class llist:
         yield el
         while True:
             el = el.right()
-            if el is None:
+            if el is None or el is self._head:
                 break
             yield el
+
+    def insert_right_of(self, node, val):
+        new_el = _lle(val, node)
+        new_el._next = node._next
+        node._next._prev = new_el
+        node._next = new_el
+        self._nodecount += 1
+        return new_el
+
+    def insert_left_of(self, node, val):
+        new_el = _lle(val, node._prev, node)
+        node._prev._next = new_el
+        node._prev = new_el
+        self._nodecount += 1
+        return new_el
+
+    def drop(self, node):
+        node._prev._next = node._next
+        node._next._prev = node._prev
+        if node is self._head:
+            self._head = node._next
+        self._nodecount -= 1
+
+    def __len__(self):
+        return self._nodecount
 
     def find(self, val):
         pass_two = False
