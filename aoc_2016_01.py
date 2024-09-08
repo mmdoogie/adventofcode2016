@@ -21,7 +21,7 @@ def part1(output = True):
         if output:
             print(s, '->', pt.as_xy(pos), 'dist', pt.m_dist(pos))
 
-    return pt.m_dist(pos)
+    return int(pt.m_dist(pos))
 
 def viz(pos, seen, size=25):
     with ansi.hidden_cursor():
@@ -56,7 +56,7 @@ def part2(output = True):
             if pos in seen:
                 if output:
                     print('during', s, 'revisited', pt.as_xy(pos), 'dist', pt.m_dist(pos))
-                return pt.m_dist(pos)
+                return int(pt.m_dist(pos))
             seen.add(pos)
 
     return 0
