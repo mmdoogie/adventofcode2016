@@ -1,6 +1,8 @@
 # adventofcode2016
 My Advent of Code 2016 solutions, for fun comparisons!
 
+This repository is being archived.  All of my solutions are now in a unified repository at https://github.com/mmdoogie/AdventOfCode
+
     python run.py -d 0
     [  0.000] Day 01, Part 1: 353                                 353                                 PASS ✅
     [  0.000] Day 01, Part 2: 152                                 152                                 PASS ✅
